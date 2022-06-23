@@ -14,11 +14,12 @@ def randomWordGenerator(word_count):
             response = requests.get('https://random-words-api.vercel.app/word')
             json_response = response.json()
             word_from_json_response = json_response[0].get('word')
-            word_list.append(word_from_json_response)
-            counter += 1
+            if word_from_json_response not in word_list:
+                word_list.append(word_from_json_response)
+                counter += 1
         return word_list
 
 try:
-    print(randomWordGenerator(word_list))
+    print(randomWordGenerator(5))
 except TypeError as e:
     print("Type error message: {}".format(e))
